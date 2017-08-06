@@ -120,8 +120,9 @@ function listWods(auth) {
       let wodNumber = Math.floor(rows.length * Math.random());
 
       let row = rows[wodNumber];
-      // Print columns A and C, which correspond to indices 0 and 2.
-      console.log('Wodnumber %s \n\nDescription:\n%s', row[0], row[2]); // refactor as template literal
+      let title = row[0];
+      let description = row[2];
+      console.log(`Wodnumber ${title} \n\nDescription:\n${description}`);
     }
   });
 }
