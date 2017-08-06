@@ -1,5 +1,3 @@
-
-
 var fs = require('fs');
 var readline = require('readline');
 var google = require('googleapis');
@@ -20,7 +18,7 @@ fs.readFile('client_secret.json', function processClientSecrets(err, content) {
   }
   // Authorize a client with the loaded credentials, then call the
   // Google Sheets API.
-  authorize(JSON.parse(content), listMajors);
+  authorize(JSON.parse(content), listWods);
 });
 
 /**
@@ -97,31 +95,33 @@ function storeToken(token) {
   console.log('Token stored to ' + TOKEN_PATH);
 }
 
+
 /**
- * Print the names and majors of students in a sample spreadsheet:
- * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
+ * Print the names of some wods
+ https://spreadsheets.google.com/feeds/list/1hwe64eKPIU7W-jvzFWR8MUzW9DrQerp67G7QBVxvdjk/od6/public/values?alt=json
  */
-function listMajors(auth) {
-  var sheets = google.sheets('v4');
+function listWods(auth) {
+  let sheets = google.sheets('v4');
   sheets.spreadsheets.values.get({
     auth: auth,
-    spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
-    range: 'Class Data!A2:E',
+    spreadsheetId: '1hwe64eKPIU7W-jvzFWR8MUzW9DrQerp67G7QBVxvdjk',
+    range: 'Sheet1!A:E',
   }, function(err, response) {
     if (err) {
       console.log('The API returned an error: ' + err);
       return;
     }
-    var rows = response.values;
+    let rows = response.values;
+    // console.log(rows);
     if (rows.length == 0) {
       console.log('No data found.');
     } else {
-      console.log('Name, Major:');
-      for (var i = 0; i < rows.length; i++) {
-        var row = rows[i];
-        // Print columns A and E, which correspond to indices 0 and 4.
-        console.log('%s, %s', row[0], row[4]);
-      }
+
+      let wodNumber = Math.floor(rows.length * Math.random());
+
+      let row = rows[wodNumber];
+      // Print columns A and C, which correspond to indices 0 and 2.
+      console.log('Wodnumber %s \n\nDescription:\n%s', row[0], row[2]); // refactor as template literal
     }
   });
 }
