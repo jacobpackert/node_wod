@@ -1,0 +1,26 @@
+{
+  "name": "node_wod",
+  "version": "0.0.1",
+  "description": "",
+  "main": "quickstart.js",
+  "dependencies": {
+    "express": "^4.15.4",
+    "google-auth-library": "^0.10.0",
+    "googleapis": "^20.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test",
+    "start": "node quickstart.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jacobpackert/node_wod.git"
+  },
+  "author": "Jacob Packert",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jacobpackert/node_wod/issues"
+  },
+  "homepage": "https://github.com/jacobpackert/node_wod#readme"
+}
